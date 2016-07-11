@@ -32,5 +32,14 @@
       <button type="submit">Add Item</button>
     </form>
     <h5 id="deleteAll"><a href="/deleteAll">remove all items</a></h2>
+
+    <form id="deleteSingular" action="/deleteOne" method="post">
+      <select name="deleteOneName">
+@foreach (var item in Model) {
+        <option name="@item.GetName()">@item.GetName()</option>
+}
+      </select>
+      <button type="submit">Delete Entry</button>
+    </form>
   </body>
 </html>

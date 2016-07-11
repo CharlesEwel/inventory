@@ -86,6 +86,21 @@ namespace Inventory.Objects
 
       Assert.Equal(-1, result);
     }
+    [Fact]
+    public void Test_DeleteOne_DeletesGivenOne()
+    {
+      InventoryItem firstInventoryItem = new InventoryItem("cat", "it's a cat");
+      firstInventoryItem.Save();
+      InventoryItem secondInventoryItem = new InventoryItem("dog", "it's a dog");
+      secondInventoryItem.Save();
+      InventoryItem thirdInventoryItem = new InventoryItem("fish", "it's a fish");
+      thirdInventoryItem.Save();
+
+      InventoryItem.DeleteOne("dog");
+      int newInventory=InventoryItem.GetAll().Count;
+
+      Assert.Equal(2, newInventory);
+    }
 
     public void Dispose()
     {

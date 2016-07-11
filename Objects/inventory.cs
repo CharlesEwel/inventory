@@ -110,6 +110,20 @@ namespace Inventory.Objects
       cmd.ExecuteNonQuery();
     }
 
+    public static void DeleteOne(string name)
+    {
+      SqlConnection conn = DB.Connection();
+      conn.Open();
+      // string commandWithVariableName = string.Format("DELETE FROM InventoryItems WHERE name= {0};", name);
+      SqlCommand cmd = new SqlCommand("DELETE FROM inventoryItems WHERE name= @ItemName;", conn);
+      SqlParameter nameParameter = new SqlParameter();
+      nameParameter.ParameterName = "@ItemName";
+      nameParameter.Value = name;
+      cmd.Parameters.Add(nameParameter);
+      cmd.ExecuteNonQuery();
+      if (conn != null) conn.Close();
+    }
+
     public static InventoryItem Find(int id)
     {
       SqlConnection conn = DB.Connection();

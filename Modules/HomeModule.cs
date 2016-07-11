@@ -33,6 +33,11 @@ namespace Inventory
         List<InventoryItem> allInventoryItems = InventoryItem.GetAll();
         return View["catalog.cshtml", allInventoryItems];
       };
+      Post["/deleteOne"] = _ => {
+        InventoryItem.DeleteOne(Request.Form["deleteOneName"]);
+        List<InventoryItem> allInventoryItems = InventoryItem.GetAll();
+        return View["catalog.cshtml", allInventoryItems];
+      };
     }
   }
 }
