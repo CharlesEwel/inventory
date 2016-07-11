@@ -56,6 +56,17 @@ namespace Inventory.Objects
       //Assert
       Assert.Equal(testList, result);
     }
+    [Fact]
+    public void Test_Save_AssignsIdToObject()
+    {
+      InventoryItem testInventoryItem = new InventoryItem("cat", "it's a cat");
+      testInventoryItem.Save();
+
+      InventoryItem foundInventoryItem = InventoryItem.Find(testInventoryItem.GetId());
+
+      Assert.Equal(testInventoryItem, foundInventoryItem);
+    }
+    
     public void Dispose()
     {
       InventoryItem.DeleteAll();

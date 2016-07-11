@@ -29,6 +29,10 @@ namespace Inventory.Objects
       }
     }
 
+    public int GetId()
+    {
+      return _id;
+    }
 
     public void SetName(string name)
     {
@@ -104,6 +108,33 @@ namespace Inventory.Objects
       conn.Open();
       SqlCommand cmd = new SqlCommand("DELETE FROM InventoryItems;", conn);
       cmd.ExecuteNonQuery();
+    }
+
+    public static InventoryItem Find(int id)
+    {
+      SqlConnection conn = DB.Connection();
+      SqlDataReader rdr = null;
+      conn.Open();
+
+      SqlCommand cmd = new SqlCommand("SELECT * FROM inventoryItems WHERE id= @InventoryItemID;", conn);
+      SqlParameter inventoryItemIdParameter = new SqlParameter();
+      inventoryItemIdParameter.ParameterName = "@InventoryItemId";
+      inventoryItemIdParameter.Value = id.ToString();
+      cmd.Parameters.Add(inventoryItemIdParameter);
+      rdr = cmd.ExecuteReader();
+
+      int foundInventoryItemId = 0;
+      string foundInventoryItemName = null;
+      string foundInventoryItemDescription = null;
+      while(rdr.Read())
+      {
+        foundInventoryItemId = rdr.GetInt32(0);
+        foundInventoryItemName = rdr.GetString(1);
+      }
+      InventoryItem foundInventoryItem = new InventoryItem(foundInventoryItemName, foundInventoryItemDescription, foundInventoryItemId);
+      if (rdr != null) rdr.Close();
+      if (conn != null) conn.Close();
+      return foundInventoryItem;
     }
   }
 }
