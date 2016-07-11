@@ -17,6 +17,19 @@ namespace Inventory.Objects
       SetDescription(description);
     }
 
+    public override bool Equals(System.Object otherInventoryItem)
+    {
+      if(!(otherInventoryItem is InventoryItem)) return false;
+      else
+      {
+        InventoryItem newInventoryItem = (InventoryItem) otherInventoryItem;
+        // bool idEquality = (this.GetId() == newInventoryItem.GetId());
+        bool nameEquality = (this.GetName() == newInventoryItem.GetName());
+        return (nameEquality);
+      }
+    }
+
+
     public void SetName(string name)
     {
       _name = name;

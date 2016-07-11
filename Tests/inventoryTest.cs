@@ -32,6 +32,30 @@ namespace Inventory.Objects
      //Assert
      Assert.Equal(1, result);
     }
+    [Fact]
+    public void Test_Equal_ReturnsTrueIfNamesAreTheSame()
+    {
+     //Arrange, Act
+     InventoryItem firstInventoryItem = new InventoryItem("cat", "it's a cat");
+     InventoryItem secondInventoryItem = new InventoryItem("cat", "it's a cat");
+
+     //Assert
+     Assert.Equal(firstInventoryItem, secondInventoryItem);
+    }
+    [Fact]
+    public void Test_Save_SavesToDatabase()
+    {
+      //Arrange
+      InventoryItem newInventoryItem = new InventoryItem("cat", "it's a cat");
+
+      //Act
+      newInventoryItem.Save();
+      List<InventoryItem> result = InventoryItem.GetAll();
+      List<InventoryItem> testList = new List<InventoryItem>{newInventoryItem};
+
+      //Assert
+      Assert.Equal(testList, result);
+    }
     public void Dispose()
     {
       InventoryItem.DeleteAll();
