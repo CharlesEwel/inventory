@@ -1,0 +1,30 @@
+h1 {
+  font-family: monospace;
+  text-decoration: underline;
+}
+th {
+  font-weight: bold;
+  font-variant: small-caps;
+}
+tr:nth-child(even) {
+  background: #CCC;
+}
+tr:nth-child(odd) {
+  background: #FFF;
+}
+form {
+  margin-top: 30px;
+  font-family: monospace;
+}
+form label, form input, button {
+  display: block;
+  margin: 3px;
+}
+input, button {
+  border-radius: 5px;
+  box-shadow: 2px 2px 5px #aaa;
+}
+
+button {
+  margin-top: 8px;
+}

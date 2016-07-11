@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Inventory Catalog</title>
+    <link href="/CONTENT/CSS/style.css" rel="stylesheet" type="text/CSS">
+  </head>
+  <body>
+    <h1>Inventory Catalog</h1>
+    <table>
+      <tr>
+        <th>Item Name</th>
+        <th>Item Description</th>
+      </tr>
+    @foreach (var item in Model) {
+      <tr>
+        <td>@item.GetName()</td>
+        <td>@item.GetDescription()</td>
+      </tr>
+    }
+    </table>
+
+    <form action="/addItemEntry" method="post">
+      <label for="name">Item name:</label>
+      <input type="text" name="name" value="">
+      <label for="description">Item description:</label>
+      <input type="text" name="description" value="">
+      <button type="submit">Add Item</button>
+    </form>
+
+  </body>
+</html>
