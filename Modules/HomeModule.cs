@@ -16,8 +16,20 @@ namespace Inventory
         return View["catalog.cshtml", allInventoryItems];
       };
       Post["/addItemEntry"] = _ => {
-        InventoryItem newEntry = new InventoryItem(Request.Form["name"],Request.Form["description"]);
-        newEntry.Save();
+        if(InventoryItem.Search(Request.Form["name"]) == -1)
+        {
+          InventoryItem newEntry = new InventoryItem(Request.Form["name"],Request.Form["description"]);
+          newEntry.Save();
+          List<InventoryItem> allInventoryItems = InventoryItem.GetAll();
+          return View["catalog.cshtml", allInventoryItems];
+        }
+        else
+        {
+          return View["error.cshtml"];
+        }
+      };
+      Get["/deleteAll"] = _ => {
+        InventoryItem.DeleteAll();
         List<InventoryItem> allInventoryItems = InventoryItem.GetAll();
         return View["catalog.cshtml", allInventoryItems];
       };

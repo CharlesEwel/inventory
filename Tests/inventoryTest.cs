@@ -66,7 +66,27 @@ namespace Inventory.Objects
 
       Assert.Equal(testInventoryItem, foundInventoryItem);
     }
-    
+    [Fact]
+    public void Test_Search_FindsIdByName()
+    {
+      InventoryItem testInventoryItem = new InventoryItem("cat", "it's a cat");
+      testInventoryItem.Save();
+
+      int result = InventoryItem.Search(testInventoryItem.GetName());
+
+      Assert.Equal(testInventoryItem.GetId(), result);
+    }
+    [Fact]
+    public void Test_Search_DoesntFindIdForUnused()
+    {
+      InventoryItem testInventoryItem = new InventoryItem("cat", "it's a cat");
+      testInventoryItem.Save();
+
+      int result = InventoryItem.Search("dog");
+
+      Assert.Equal(-1, result);
+    }
+
     public void Dispose()
     {
       InventoryItem.DeleteAll();

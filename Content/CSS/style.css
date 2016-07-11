@@ -28,3 +28,11 @@ input, button {
 button {
   margin-top: 8px;
 }
+
+#deleteAll {
+  text-align: center;
+  border-radius: 5px;
+  border: 1px solid #000;
+  background-color: #FF7777;
+  width: 160px;
+}

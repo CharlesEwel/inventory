@@ -136,5 +136,25 @@ namespace Inventory.Objects
       if (conn != null) conn.Close();
       return foundInventoryItem;
     }
+
+    public static int Search(string searchName)
+    {
+      SqlConnection conn = DB.Connection();
+      SqlDataReader rdr = null;
+      conn.Open();
+
+      SqlCommand cmd = new SqlCommand("SELECT * FROM inventoryItems WHERE name= @ItemName;", conn);
+      SqlParameter nameParameter = new SqlParameter();
+      nameParameter.ParameterName = "@ItemName";
+      nameParameter.Value = searchName;
+      cmd.Parameters.Add(nameParameter);
+      rdr = cmd.ExecuteReader();
+
+      int foundInventoryItemId = -1;
+      while(rdr.Read()) foundInventoryItemId = rdr.GetInt32(0);
+      if (rdr != null) rdr.Close();
+      if (conn != null) conn.Close();
+      return foundInventoryItemId;
+    }
   }
 }
