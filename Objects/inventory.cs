@@ -23,7 +23,7 @@ namespace Inventory.Objects
       else
       {
         InventoryItem newInventoryItem = (InventoryItem) otherInventoryItem;
-        // bool idEquality = (this.GetId() == newInventoryItem.GetId());
+        bool idEquality = (this.GetId() == newInventoryItem.GetId());
         bool nameEquality = (this.GetName() == newInventoryItem.GetName());
         return (nameEquality);
       }
