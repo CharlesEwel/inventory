@@ -15,11 +15,22 @@ namespace Inventory.Objects
     [Fact]
     public void Test_DatabaseEmptyAtFirst()
     {
-    //  //Arrange, Act
-    //  int result = InventoryItem.GetAll().Count;
-     //
-    //  //Assert
-    //  Assert.Equal(0, result);
+     //Arrange, Act
+     int result = InventoryItem.GetAll().Count;
+
+     //Assert
+     Assert.Equal(0, result);
+    }
+    [Fact]
+    public void Test_DatabaseHasStuff()
+    {
+     //Arrange, Act
+     InventoryItem newInventoryItem = new InventoryItem("cat", "it's a cat");
+     newInventoryItem.Save();
+     int result = InventoryItem.GetAll().Count;
+
+     //Assert
+     Assert.Equal(1, result);
     }
     public void Dispose()
     {
